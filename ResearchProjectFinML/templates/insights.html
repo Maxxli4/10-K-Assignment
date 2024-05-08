@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights</title>
+</head>
+<body>
+    <h1>Insights</h1>
+    <div>
+        {% for insight in insights %}
+            <div>
+                <h2>Filing {{ loop.index }}</h2>
+                <h3>Emotional Sentences:</h3>
+                <ul>
+                    {% for emotion, sentences in insight['emotional_sentences'].items() %}
+                        <li>{{ emotion }}:</li>
+                        <ul>
+                            {% for sentence in sentences %}
+                                <li>{{ sentence }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </ul>
+                <h3>Summaries:</h3>
+                <ul>
+                    {% for summary in insight['summaries'] %}
+                        <li>{{ summary }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

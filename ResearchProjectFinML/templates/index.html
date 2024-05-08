@@ -1,0 +1,62 @@
+<!-- templates/index.html (Frontend) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Name Processor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .container {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Enter Company Name</h2>
+    <input type="text" id="companyName" placeholder="Enter company name...">
+    <button onclick="processCompany()">Process</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function processCompany() {
+        var companyName = document.getElementById("companyName").value;
+        fetch('/process_company', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ company_name: companyName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerHTML = data.result;
+        });
+    }
+</script>
+
+</body>
+</html>
